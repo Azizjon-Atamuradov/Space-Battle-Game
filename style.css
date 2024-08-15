@@ -26,3 +26,15 @@ header {
     padding: 1em;
 }
 
+.button {
+    display: flex;
+    justify-content: center;
+  
+} 
+
+#start {
+    font-size: 20px;
+}
+
+
+
