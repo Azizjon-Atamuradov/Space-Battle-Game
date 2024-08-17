@@ -1,40 +1,30 @@
-
-header {
-    border: solid ;
-    text-align: center;
-    font-size: 30px;
+/* display gameboard--------------------------------------------------------- */
+.gameboard {
+    border: solid black;
+    height: 65vh;
     margin: 1em;
-}
-
-.player {
-    border: solid green;
-    font-size: 25px;
-    padding: 1em;
-}
-
-.alien {
-    border: solid red;
-    font-size: 25px;
-    padding: 1em;
-}
-
-.battle {
-    border: solid blue;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    margin: 1em;
-    padding: 1em;
 }
 
-.button {
+/* display gameboard--------------------------------------------------------- */
+
+.p1 {
+    width: 100%;
     display: flex;
     justify-content: center;
-  
-} 
-
-#start {
-    font-size: 20px;
+    flex-wrap: wrap;
 }
 
+ .scoreboard {
+    border: solid  black;
+    height: 65px;
+    display: flex;
+    justify-content: end;
+    margin: 1em;
+    padding: 1em;
+ }
 
 
+ 
