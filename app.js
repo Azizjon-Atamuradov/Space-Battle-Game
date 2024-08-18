@@ -30,6 +30,21 @@ class Player {
 
 
 
-/// 
+/// function to create aliens ship for the current round
 
  
+const createAliens  = (numAliens) => {
+    horde = [];  //reset the horde for the new round
+    for (let i = 1; i <= numAliens; i++) {
+        let alien = new Player (
+            `Alien${i}`,  
+            generateRandomNumber(3, 6), // random hull value
+            generateRandomNumber(2, 4), // random firepower value
+            generateRandomNumber(0.6, 0.8) /// random accuracy value
+        );
+        horde.push(alien);       //// add the allien to the horde
+    } 
+    displayAliens(); // update the display to show the new aliens
+};
+
+
