@@ -124,3 +124,65 @@ const startGame = () => {
 };
 
 
+const resetGame = () => {
+    currentRound = 1; 
+    horde = [];
+    document.querySelector(".rndCnt").innerHTML = currentRound;
+    document.querySelector(".p1").innerHTML = "";
+    displayPlayer();
+    enableButtons();
+}
+
+
+/////// function to add a new round 
+
+
+const  add = () => {
+    if (currentRound < maxRounds) {
+        currentRound++; 
+        document.querySelector(".rndCnt").innerHTML = currentRound;   /// update the round counter in ui
+        createAliens(currentRound);  // create new aliens for the current round
+        updateOracle("Player's Turn");  /// indicate it's the players turn
+
+    } else {
+        ///// random the winner after 5 rounds 
+        if (Math.random() < 0.5) {
+            ussAssemblyWins();  //// player wind
+        } else {
+            alienWins()      /// alien win
+        }
+    }
+};
+
+// Function to handle the player's fire action
+
+const fire = () => {
+    if (!gameActive || !p1Turn) return ///// if game isn't active or its not player turn, do nothing
+    if (horde.length === 0) return;  /// if no aliens , do nothing
+
+    let targetAlien = horde[0]; /// target the first alien in the horde 
+    updateOracle("Player makes a shot!");    /// indicate  player is shooting
+    if (ussAssembly.attack(targetAlien)) {
+        targetAlien.hull -= ussAssembly.firepower;  /// reduce aliens hull if hit 
+
+
+        if (targetAlien.hull <= 0) {
+            horde.shift();    /// remove alien if its hull is 0 or less
+            displayAliens(); /// update alien display
+            
+            if (horde.length === 0) {
+                addRound(); // move to the next round if no aliens left
+                return;
+            }
+        }
+        updateAlienHealth(targetAlien);    /// update alien's health bar
+
+    }  else {
+        updateOracle("Player missed!");   /// indicate a miss
+    }
+
+    toggleTurn();            /// switch turns to te alien
+    setTimeout(alienAttack, 1000);       /// wait 1 second before alien attacks   
+};
+
+/// function to update the aliens health bar
