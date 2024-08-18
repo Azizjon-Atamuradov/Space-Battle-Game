@@ -186,3 +186,77 @@ const fire = () => {
 };
 
 /// function to update the aliens health bar
+
+
+const updateAlienHealth = (alien) => {
+    let alienElement = document.querySelector(".p1 .ufo:nth-child(1) .alienHealth"); // find the aliens health bar
+    if (alienElement) alienElement.style.width = `$(alien.hull * 10)px`; // update the width based on hull 
+};
+
+
+// func to handle the alien's attack
+
+const alienAttack = () => {
+    if (!gameActive || p1Turn || horde.length === 0) return; /// if game isn't active it's player turn or no aliens , do nothing
+
+    let attackingAlien = horde[0]; // alien to attack is the first in the horde
+    updateOracle("Alien makes a shot!");  /// indicate alien is shooting
+
+
+    if (attackingAlien.attack(ussAssembly)) {
+        ussAssembly.hull -= attackingAlien.firepower;  //// reduce player hull if fit
+
+        if (ussAssembly.hull <= 0) {
+            alienWins();       /// aliens win if player hull is 0 or less
+            return;
+        }
+        updatePlayerHealth();  /// update player health bar
+    }else {
+        updateOracle("Alien missed!");  // indicate a miss
+    }
+
+    toggleTurn();  /// switch turns to the player
+    updateOracle("Player Turn");  /// indicate it's the player turn
+};
+
+
+///function to update the player health bar
+
+const updatePlayerHealth = () => {
+    let playerHealthBar = document.querySelector(".playerHealth");  //// find player health bar
+    playerHealthBar.style.width = `${ussAssembly.hull * 10}px`;  /// update the width based on hull 
+};
+
+// func to declare the player as the winner
+
+const ussAssemblyWins = () => {
+    updateOracle("USS Assembly Wins th Game!");  // display win message
+    endGame();   /// end the game
+};
+
+const aliensWins = () => {
+    updateOracle("Aliens Win the Game!");  /// display loss message
+    endGame(); 
+}
+
+
+const endGame = () => {
+    gameActive = false;   /// mark the game as inactive
+    
+}
+
+
+const restartGame = () => {
+    if (gameActive) return; /// if the game is active do nothing
+    resetGame();  /// reset the game state
+    startGame(); /// start a new game
+}
+
+
+//initialize the game
+
+startGame();
+
+document.querySelector(".start").addEventListener("click", startGame);  /// start the game
+document.querySelector(".fire").addEventListener("click", fire); //// fire button
+document.querySelector(".restart").addEventListener("click", restartGame) //// restart
