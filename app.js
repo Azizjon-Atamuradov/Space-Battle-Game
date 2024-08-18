@@ -77,3 +77,50 @@ const displayAliens = () => {
 
 
 
+////// function to display the player ship
+
+const displayPlayer = () => {
+    let nameHolder = document.querySelector(".kobe");  ///// find the element to display the player name
+    nameHolder.innerHTML = ussAssembly.name; ///// display the player name
+
+    let playerHealthBar = document.querySelector(".playerHealth");  //find the palyer health bar element
+    playerHealthBar.computedStyleMap.WIDTH = `${ussAssembly.hull * 10}px`   /// set the health bar width based on hull
+
+    let playerStage = document.querySelector(".p2"); /// find the stage for the playe
+    playerStage.innerHtml ="";      /// clear existing content
+
+
+    let image = document.createElement("img");
+    image.src = "https://media4.giphy.com/media/jds2a7BEHgpqu5uVDB/giphy.webp?cid=ecf05e47h4g78at2p1nnn6bcjavcxb1g3nl7w3gkm3sd4zlq&ep=v1_gifs_search&rid=giphy.webp&ct=g"; // Player GIF URL
+    image.className = "playerImage"; // Assign a class to the image
+
+    /// append the image to the playerStage
+
+    playerStage.append(image);
+
+};
+
+
+///////////////////////////// function to update the oracle game status
+
+const updateOracle = (message) => {
+    let oracle = document.querySelector(".oracle"); ////// find the oracleelemnt 
+    oracle.innerHtml = message; //// set the oracle text to the provided message
+};
+
+
+
+///// function to start game 
+
+const startGame = () => {
+    if (gameActive) return; 
+
+    ussAssembly = new player("USS Assembly", 20, 5, 0.7 ); 
+    resetGame(); //reset the game to the initial state
+    createAliens(1); // create the first round of aliens
+    updateOracle("Player's Turn") 
+    gameActive = true;
+    enableButtons(); 
+};
+
+
