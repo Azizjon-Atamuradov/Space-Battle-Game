@@ -15,7 +15,7 @@
 
 
 <!-- round -------------------------------------------------->
- <div class="round">Round <span class="rdnCnt">1</span></div>
+ <div class="round">Round <span class="rndCnt">1</span></div>
 <!-- round -------------------------------------------------->
 
 
@@ -41,21 +41,25 @@
     <!-- -----------------fight arena -->
     <div class="fightArena"></div>
     <!-- -----------------fight arena -->
-  </div>
+ 
    <!-- gameboard----------------------------------------------------------------------- -->
-
-
+   <div class="fightArena"></div>
+   <div class="p2">
+       <div class="hero"></div>
+   </div>
+</div>
+</div>
 <!-- buttons-------------------------------------------------------------------------------- -->
 <!--  -->
 <div class="infoBox">
     <!-- button to start game -->
-    <button id="startGame" class="starter" >Start Game</button>
+    <button id="startGame" class="starter" onclick="startGame()">Start Game</button>
     <!-- button to start game -->
     <!-- fire button------------------------------------------------- -->
-    <button id="fire" class="starter">Fire</button>
+    <button id="fire" class="starter" onclick="fire()">Fire</button>
     <!-- fire button------------------------------------------------- -->
     <!-- restart button -->
-     <button id="restartGame" class="starter">Restart Game</button>
+     <button id="restartGame" class="starter" onclick="restartGame()">Restart Game</button>
     <!-- restart button -->
 </div>
 <!-- buttons-------------------------------------------------------------------------------- -->
@@ -70,7 +74,7 @@
 
 
 
-
+ 
 
 
 

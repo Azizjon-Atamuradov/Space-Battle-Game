@@ -27,4 +27,71 @@
  }
 
 
+ .ufo, .hero {
+    margin: 2em;
+    height: 50px;
+    width: 50px;
+ }
+
+
+ .round {
+    border: solid green;
+    font-size: 25px;
+    text-align: center;
+    margin: 1em;
+ }
+
+ .rdnCnt {
+    color: red;
+    border: solid red;
+ }
+
+ .infoBox {
+    border: solid black;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em; /* Adds space between the buttons inside the info box */
+ }
+
+ .playerHealth, .alienHealth {
+    border: solid black;
+    background-color: green;
+    height: 8px;
+    width: 100px;
+ }
+
+ header {
+    border: solid red;
+    font-size: 25px;
+    text-align: center;
+    margin: 1em;
+ }
+
+ .oracle {
+    font-size: 20px;
+    margin: 1em;
+ }
+
+ .alienImage {
+    width: 100px;
+    height: 100px;
+ }
+
+
+ .playerImage {
+    width: 250px;
+    height: 250px;
+    margin: 1em;
+ }
+
+
  
+.rndCnt {
+    color: red;
+    border: solid red;
+}
+.p2 { display: flex;
+justify-content: center;
+}

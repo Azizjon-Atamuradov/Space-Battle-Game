@@ -10,6 +10,7 @@ let ussAssembly = null;
 
 ///// random number 
 
+ 
 const generateRandomNumber = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 
 
@@ -21,7 +22,7 @@ class Player {
         this.name = name;  /// name of ship
         this.hull = hull; /// health points of ship
         this.firepower = firepower;  /// damage points the ship can deal
-        this.firepower = accuracy; /// probability of a successful attack
+        this.accuracy = accuracy; /// probability of a successful attack
     }
     attack(target) {
         return Math.random() < this.accuracy; /// true if attack hits , false otherwise
@@ -46,6 +47,12 @@ const createAliens  = (numAliens) => {
     } 
     displayAliens(); // update the display to show the new aliens
 };
+ 
+ ////////////////////
+ 
+
+
+////////////////////////////////////////
 
 
 ////// function to display the alien ships 
@@ -60,7 +67,7 @@ const displayAliens = () => {
 
         /// create an img element for the alien image 
         let image = document.createElement("img")
-        image.src = "https://www.bing.com/th/id/OGC.cff3e5275135e796ed81ef0cea6dfb1d?pid=1.7&rurl=https%3a%2f%2fi.gifer.com%2forigin%2f0f%2f0fb4d1a5937461d0009324f8afcbbdb5.gif&ehk=vD9IEjRbJcPJS%2f0jMwuGLlQtnuCAgKdPMUquQfexapY%3d"; // Alien GIF URL
+        image.src = "https://www.bing.com/th/id/OGC.cff3e5275135e796ed81ef0cea6dfb1d?pid=1.7&rurl=https%3a%2f%2fi.gifer.com%2forigin%2f0f%2f0fb4d1a5937461d0009324f8afcbbdb5.gif&ehk=vD9IEjRbJcPJS%2f0jMwuGLlQtnuCAgKdPMUquQfexapY%3d" ; // Alien GIF URL
         image.className = "alienImage"; // Assign a class to the image
 
         // ////////// append the image to the new_enemy div
@@ -73,71 +80,67 @@ const displayAliens = () => {
     });
 
 };
-
-
-
-
-////// function to display the player ship
+ 
 
 const displayPlayer = () => {
-    let nameHolder = document.querySelector(".kobe");  ///// find the element to display the player name
-    nameHolder.innerHTML = ussAssembly.name; ///// display the player name
+    let nameHolder = document.querySelector(".kobe");
+    nameHolder.innerHTML = ussAssembly.name; // Display player name
 
-    let playerHealthBar = document.querySelector(".playerHealth");  //find the palyer health bar element
-    playerHealthBar.computedStyleMap.WIDTH = `${ussAssembly.hull * 10}px`   /// set the health bar width based on hull
+    let playerHealthBar = document.querySelector(".playerHealth");
+    playerHealthBar.style.width = `${ussAssembly.hull * 10}px`; // Set health bar width
 
-    let playerStage = document.querySelector(".p2"); /// find the stage for the playe
-    playerStage.innerHtml ="";      /// clear existing content
-
+    let playerStage = document.querySelector(".p2");
+    playerStage.innerHTML = ""; // Clear existing content
 
     let image = document.createElement("img");
-    image.src = "https://media4.giphy.com/media/jds2a7BEHgpqu5uVDB/giphy.webp?cid=ecf05e47h4g78at2p1nnn6bcjavcxb1g3nl7w3gkm3sd4zlq&ep=v1_gifs_search&rid=giphy.webp&ct=g"; // Player GIF URL
+    image.src = "https://media4.giphy.com/media/jds2a7BEHgpqu5uVDB/giphy.webp?cid=ecf05e47h4g78at2p1nnn6bcjavcxb1g3nl7w3gkm3sd4zlq&ep=v1_gifs_search&rid=giphy.webp&ct=g";
     image.className = "playerImage"; // Assign a class to the image
 
-    /// append the image to the playerStage
-
-    playerStage.append(image);
-
+    playerStage.append(image); // Append the image to the playerStage
 };
+
 
 
 ///////////////////////////// function to update the oracle game status
 
 const updateOracle = (message) => {
     let oracle = document.querySelector(".oracle"); ////// find the oracleelemnt 
-    oracle.innerHtml = message; //// set the oracle text to the provided message
+    oracle.innerHTML = message; //// set the oracle text to the provided message
 };
 
 
 
-///// function to start game 
-
+ 
 const startGame = () => {
+    
     if (gameActive) return; 
-
-    ussAssembly = new player("USS Assembly", 20, 5, 0.7 ); 
-    resetGame(); //reset the game to the initial state
-    createAliens(1); // create the first round of aliens
+    ussAssembly = new Player("USS Assembly", 20, 5, 0.7 ); 
+    resetGame(); 
+    createAliens(1); 
     updateOracle("Player's Turn") 
     gameActive = true;
     enableButtons(); 
 };
+ 
+
+
 
 
 const resetGame = () => {
     currentRound = 1; 
+    p1Turn = true;
     horde = [];
     document.querySelector(".rndCnt").innerHTML = currentRound;
     document.querySelector(".p1").innerHTML = "";
     displayPlayer();
     enableButtons();
-}
+};
 
-
+ 
 /////// function to add a new round 
 
 
-const  add = () => {
+const  addRound = () => {
     if (currentRound < maxRounds) {
         currentRound++; 
         document.querySelector(".rndCnt").innerHTML = currentRound;   /// update the round counter in ui
@@ -153,7 +156,9 @@ const  add = () => {
         }
     }
 };
-
+ 
+ 
+ 
 // Function to handle the player's fire action
 
 const fire = () => {
@@ -188,9 +193,14 @@ const fire = () => {
 /// function to update the aliens health bar
 
 
+ 
 const updateAlienHealth = (alien) => {
-    let alienElement = document.querySelector(".p1 .ufo:nth-child(1) .alienHealth"); // find the aliens health bar
-    if (alienElement) alienElement.style.width = `$(alien.hull * 10)px`; // update the width based on hull 
+    let alienElements = document.querySelectorAll(".p1 .ufo .alienHealth");
+    alienElements.forEach((element, index) => {
+        if (index === 0) { // Assuming we update the first alien health only
+            element.style.width = `${alien.hull * 10}px`;
+        }
+    });
 };
 
 
@@ -226,6 +236,9 @@ const updatePlayerHealth = () => {
     let playerHealthBar = document.querySelector(".playerHealth");  //// find player health bar
     playerHealthBar.style.width = `${ussAssembly.hull * 10}px`;  /// update the width based on hull 
 };
+const toggleTurn = () => {
+    p1Turn = !p1Turn;
+};
 
 // func to declare the player as the winner
 
@@ -234,7 +247,7 @@ const ussAssemblyWins = () => {
     endGame();   /// end the game
 };
 
-const aliensWins = () => {
+const alienWins = () => {
     updateOracle("Aliens Win the Game!");  /// display loss message
     endGame(); 
 }
@@ -244,7 +257,16 @@ const endGame = () => {
     gameActive = false;   /// mark the game as inactive
     
 }
-
+// const enableButtons = () => {
+//     document.querySelector("#startGame").disabled = !gameActive;
+//     document.querySelector("#fire").disabled = !gameActive || !p1Turn;
+//     document.querySelector("#restartGame").disabled = !gameActive;
+// };
+const enableButtons = () => {
+    document.getElementById("startGame").style.display = "block";
+    document.getElementById("fire").style.display = "block";
+    document.getElementById("restartGame").style.display = "block";
+};
 
 const restartGame = () => {
     if (gameActive) return; /// if the game is active do nothing
@@ -252,11 +274,21 @@ const restartGame = () => {
     startGame(); /// start a new game
 }
 
+////
+ 
+
 
 //initialize the game
 
-startGame();
 
-document.querySelector(".start").addEventListener("click", startGame);  /// start the game
-document.querySelector(".fire").addEventListener("click", fire); //// fire button
-document.querySelector(".restart").addEventListener("click", restartGame) //// restart
+
+// Initialize game
+document.querySelector("#startGame").addEventListener("click", startGame);
+document.querySelector("#fire").addEventListener("click", fire);
+document.querySelector("#restartGame").addEventListener("click", restartGame);
+
+ 
+
+startGame();
+ 
+////////////////////////////////
