@@ -48,3 +48,32 @@ const createAliens  = (numAliens) => {
 };
 
 
+////// function to display the alien ships 
+
+const displayAliens = () => {
+    let playerStage = document.querySelector(".p1")    ///find the stage for aliens
+    playerStage.innerHTML = "";   /// clear existing aliens
+
+    horde.forEach( alien => {
+        let new_enemy = document.createElement("div");
+        new_enemy.className = "ufo";     /// assign a class to the alien
+
+        /// create an img element for the alien image 
+        let image = document.createElement("img")
+        image.src = "https://www.bing.com/th/id/OGC.cff3e5275135e796ed81ef0cea6dfb1d?pid=1.7&rurl=https%3a%2f%2fi.gifer.com%2forigin%2f0f%2f0fb4d1a5937461d0009324f8afcbbdb5.gif&ehk=vD9IEjRbJcPJS%2f0jMwuGLlQtnuCAgKdPMUquQfexapY%3d"; // Alien GIF URL
+        image.className = "alienImage"; // Assign a class to the image
+
+        // ////////// append the image to the new_enemy div
+        new_enemy.append(image);
+
+
+        //// add the new enemy div to the playerStage
+        playerStage.append(new_enemy);
+
+    });
+
+};
+
+
+
+
