@@ -122,6 +122,7 @@ const startGame = () => {
     enableButtons(); 
 };
  
+ 
 
 
 
@@ -137,6 +138,7 @@ const resetGame = () => {
 };
 
  
+
 /////// function to add a new round 
 
 
@@ -273,7 +275,7 @@ const restartGame = () => {
     resetGame();  /// reset the game state
     startGame(); /// start a new game
 }
-
+ 
 ////
  
 

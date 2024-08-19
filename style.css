@@ -35,7 +35,7 @@
 
 
  .round {
-    border: solid green;
+    /* border: solid green; */
     font-size: 25px;
     text-align: center;
     margin: 1em;
@@ -63,7 +63,7 @@
  }
 
  header {
-    border: solid red;
+    /* border: solid red; */
     font-size: 25px;
     text-align: center;
     margin: 1em;
@@ -94,4 +94,14 @@
 }
 .p2 { display: flex;
 justify-content: center;
+}
+
+body {
+ background: url("https://wallpapercave.com/wp/wp3284839.gif");  
+ color: white; 
+ color: lime;
+}
+
+button {
+    font-size: 25px;
 }
